@@ -8,9 +8,9 @@ pipeline {
                 sh './gradlew test'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('Scan') {
+            steps{
+                aquaMicroscanner imageName: 'openjdk', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
             }
         }
     }
