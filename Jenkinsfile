@@ -3,6 +3,7 @@ pipeline {
 
     stages {
         stage('Test') {
+            agent { label 'gradle' }
             steps {
                 echo 'Testing..'
                 sh './gradlew test'
