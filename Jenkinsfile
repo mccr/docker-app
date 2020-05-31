@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Scan') {
             steps{
-                aquaMicroscanner imageName: 'openjdk', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
+                sh 'docker info'
             }
         }
     }
