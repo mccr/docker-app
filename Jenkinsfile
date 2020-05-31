@@ -8,12 +8,12 @@ pipeline {
 //                sh './gradlew test'
 //            }
 //        }
-        stage('Clone sources') {
-            git url: 'https://github.com/mccr/docker-app.git'
+        dir('repo') {
+            checkout scm
         }
         stage('Scan') {
-            steps{
-                sh 'docker build --build-arg=token=YjY1NzJlYzdhZmEz --no-cache .'
+            steps {
+                sh 'cd repo && docker build --build-arg=token=YjY1NzJlYzdhZmEz --no-cache .'
             }
         }
     }
