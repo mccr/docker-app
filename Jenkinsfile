@@ -4,12 +4,12 @@ pipeline {
         SCANNER_TOKEN = credentials('scanner-token')
     }
     stages {
-//        stage('Test') {
-//            steps {
-//                echo 'Testing..'
-//                sh './gradlew test'
-//            }
-//        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                sh './gradlew test'
+            }
+        }
         stage('Scan') {
             steps {
                 checkout scm
