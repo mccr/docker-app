@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        SCANNER_TOKEN = credentials('scanner-token')
+    }
     stages {
 //        stage('Test') {
 //            steps {
@@ -12,7 +14,7 @@ pipeline {
             steps {
                 checkout scm
                 sh './gradlew build'
-                sh 'docker build --build-arg=token=YjY1NzJlYzdhZmEz --no-cache .'
+                sh 'docker build --build-arg=token=$SCANNER_TOKEN --no-cache .'
             }
         }
     }
