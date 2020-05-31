@@ -8,12 +8,10 @@ pipeline {
 //                sh './gradlew test'
 //            }
 //        }
-//        dir('repo') {
-//            checkout scm
-//        }
         stage('Scan') {
             steps {
                 checkout scm
+                sh './gradlew build'
                 sh 'docker build --build-arg=token=YjY1NzJlYzdhZmEz --no-cache .'
             }
         }
