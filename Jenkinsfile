@@ -53,7 +53,7 @@ pipeline {
         }
         stage('Scan') {
             steps{
-                aquaMicroscanner imageName: dockerImage, notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
+                aquaMicroscanner imageName: dockerImage.toString(), notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
             }
         }
     }
