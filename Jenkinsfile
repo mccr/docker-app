@@ -11,10 +11,8 @@ pipeline {
             }
         }
         stage('Scan') {
-            steps {
-                checkout scm
-                sh './gradlew build'
-                sh 'docker build --build-arg=token=$SCANNER_TOKEN --no-cache .'
+            steps{
+                aquaMicroscanner imageName: 'mcalder/docker-scan-demo:firsttry', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
             }
         }
     }
