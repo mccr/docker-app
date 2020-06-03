@@ -8,17 +8,17 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            agent {
-                docker {
-                    image 'gradle:jdk'
-                }
-            }
-            steps {
-                echo 'Testing..'
-                sh './gradlew test'
-            }
-        }
+//        stage('Test') {
+//            agent {
+//                docker {
+//                    image 'gradle:jdk'
+//                }
+//            }
+//            steps {
+//                echo 'Testing..'
+//                sh './gradlew test'
+//            }
+//        }
         stage ("lint dockerfile") {
             agent {
                 docker {
