@@ -39,7 +39,7 @@ pipeline {
         }
         stage ("verify signatures") {
             steps {
-                sh 'docker trust inspect $baseImage >> signatures.txt'
+                sh 'docker trust inspect $baseImage | tee -a signatures.txt'
             }
             post {
                 always {
