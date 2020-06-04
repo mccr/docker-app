@@ -39,6 +39,16 @@ pipeline {
                 }
             }
         }
+        stage ("verify signatures") {
+            steps {
+                sh 'docker trust inspect $baseImage >> signatures.txt'
+            }
+            post {
+                always {
+                    archiveArtifacts 'signatures.txt'
+                }
+            }
+        }
         stage('Building image') {
             steps{
                 script {
