@@ -5,6 +5,8 @@ pipeline {
         registry = "mcalder/docker-app"
         registryCredential = 'dockerhub'
         dockerImage = ''
+        baseImage = 'openjdk:11'
+        imageName = "mcalder/docker-app:$BUILD_NUMBER"
     }
 
     stages {
@@ -28,6 +30,8 @@ pipeline {
             steps {
                 checkout scm
                 sh 'hadolint Dockerfile | tee -a hadolint_lint.txt'
+                sh 'echo "Signatures" >> hadolint_lint.txt'
+                sh 'docker trust inspect $baseImage >> hadolint_lint.txt'
             }
             post {
                 always {
@@ -49,11 +53,12 @@ pipeline {
                         dockerImage.push()
                     }
                 }
+                sh 'docker trust sign $imageName'
             }
         }
         stage('Scan') {
             steps{
-                aquaMicroscanner imageName: "mcalder/docker-app:$BUILD_NUMBER", notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
+                aquaMicroscanner imageName: imageName, notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
             }
         }
     }
