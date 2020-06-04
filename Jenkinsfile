@@ -30,8 +30,6 @@ pipeline {
             steps {
                 checkout scm
                 sh 'hadolint Dockerfile | tee -a hadolint_lint.txt'
-                sh 'echo "Signatures" >> hadolint_lint.txt'
-                sh 'docker trust inspect $baseImage >> hadolint_lint.txt'
             }
             post {
                 always {
