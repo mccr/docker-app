@@ -61,7 +61,7 @@ pipeline {
             }
             steps {
                 checkout scm
-                sh './gradlew build'
+                sh 'gradle build'
                 sh 'docker build --build-arg=token=$SCANNER_TOKEN --no-cache .'
             }
         }
