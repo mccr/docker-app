@@ -61,7 +61,8 @@ pipeline {
                         dockerImage.push()
                     }
                 }
-//                sh 'docker trust sign $imageName'
+                export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE=jape-vigour-clambake-immunize-docket-tsar-lois
+                sh 'docker trust sign $imageName'
             }
         }
         stage('Scan') {
