@@ -54,14 +54,9 @@ pipeline {
             }
         }
         stage('Scan') {
-            agent {
-                docker {
-                    image 'gradle:jdk'
-                }
-            }
             steps {
                 checkout scm
-                sh 'gradle build --no-daemon'
+                sh './gradlew build --no-daemon'
                 sh 'docker build --build-arg=token=$SCANNER_TOKEN --no-cache .'
             }
         }
