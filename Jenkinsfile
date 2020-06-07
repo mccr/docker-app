@@ -61,7 +61,7 @@ pipeline {
                         dockerImage.push()
                     }
                 }
-                sh 'docker trust sign $imageName'
+//                sh 'docker trust sign $imageName'
             }
         }
         stage('Scan') {
