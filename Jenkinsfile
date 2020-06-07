@@ -54,6 +54,11 @@ pipeline {
             }
         }
         stage('Scan') {
+            agent {
+                docker {
+                    image 'gradle:jdk'
+                }
+            }
             steps {
                 checkout scm
                 sh './gradlew build'
