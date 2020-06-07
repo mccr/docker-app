@@ -17,6 +17,6 @@ class HelloWorldController {
 
     @GetMapping("/")
     fun helloWorld():String {
-        return "Hello"
+        return "Hello Docker"
     }
 }
