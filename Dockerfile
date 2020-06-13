@@ -1,6 +1,7 @@
-FROM openjdk:11 AS Build
-COPY build/libs/demo-0.0.1-SNAPSHOT.jar demo.jar
+FROM openjdk:latest AS Build
+ADD build/libs/demo-0.0.1-SNAPSHOT.jar demo.jar
 CMD ["java", "-jar", "demo.jar"]
+USER root
 
 FROM Build AS Scan
 RUN apt-get update && apt-get -y install ca-certificates
