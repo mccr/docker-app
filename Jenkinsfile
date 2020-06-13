@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     environment {
-        registry = "mcalder/docker-app"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
         baseImage = 'openjdk:11'
-        imageName = "mcalder/docker-app:$BUILD_NUMBER"
         SCANNER_TOKEN = credentials('scanner-token')
     }
 
@@ -34,22 +30,6 @@ pipeline {
             post {
                 always {
                     archiveArtifacts 'signatures.txt'
-                }
-            }
-        }
-        stage('Building image') {
-            steps{
-                script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                }
-            }
-        }
-        stage('Deploy Image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
                 }
             }
         }
